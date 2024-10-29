@@ -45,7 +45,7 @@ test("Update Process Title and First Activity", async ({ page }) => {
 });
 
 test("Check API for last item", async ({ request }) => {
-  const response = await request.get(encodeURI("https://us-reporting.promapp.io/odata/processes"), {
+  const response = await request.get(encodeURI("https://us-reporting.promapp.io/odata/processes?$filter=UniqueId eq 03fe63d3-8ecb-4a86-909c-3cd6228f796f"), {
     headers: {
       Authorization: "Bearer gxnqaVeXmyc9PgyagS02GWvVh1TUMv70mNMfkPBbMN4",
     },
@@ -55,8 +55,6 @@ test("Check API for last item", async ({ request }) => {
   expect(response.ok()).toBeTruthy();
 
   const jsonData = await response.json();
-  const process = jsonData.value.filter(function (item) {
-    return item.UniqueId == "03fe63d3-8ecb-4a86-909c-3cd6228f796f";
-  });
+  const process = jsonData.value[0]
   console.log(process);
 });
