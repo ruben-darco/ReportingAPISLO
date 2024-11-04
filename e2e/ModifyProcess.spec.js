@@ -48,6 +48,6 @@ test("Check API for last item", async ({ request }) => {
   const prevRun = new Date(Date.parse(dateStr))
   const now = new Date()
   const twelveHours = 14*3600000;
-  console.log(`Now: ${now}; prevRun: ${prevRun}; Compared: ${prevRun - now}`);
-  expect((prevRun - now) < twelveHours).toBeTruthy()
+  console.log(`Now: ${now}; prevRun: ${prevRun}; Compared: ${now- prevRun}`);
+  expect((now - prevRun) < twelveHours).toBeTruthy()
 });
