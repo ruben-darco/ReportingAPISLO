@@ -1,4 +1,5 @@
 name: Playwright Tests
+
 on:
   push:
     branches: [ main ]
@@ -18,10 +19,17 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: LAST_RUN=$LAST_RUN npx playwright test
+    - run: |
+        gh variable list
+        gh variable set LAST_RUN --body $(date +'%Y-%m-%dT%H:%M:%S')
+        gh variable list
+      env:
+        GH_TOKEN: ${{ secrets.FULL_PAT }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+    

@@ -21,7 +21,7 @@ test("Update Process Title and First Activity", async ({ page }) => {
   // check if we're logged in
   await page.getByRole("link", { name: "Admin" }).isVisible();
 
-  const curDateTime = new Date().toUTCString();
+  const curDateTime = new Date().toISOString().substring(0, 19); // '2024-11-04T14:51:16'
   const teststring = `RDA_${curDateTime}`;
 
   await page.goto("https://us.promapp.com/smoketest/Process/03fe63d3-8ecb-4a86-909c-3cd6228f796f");
@@ -50,11 +50,15 @@ test("Check API for last item", async ({ request }) => {
       Authorization: "Bearer gxnqaVeXmyc9PgyagS02GWvVh1TUMv70mNMfkPBbMN4",
     },
   });
+
   console.log(response);
   console.log(response.body);
   expect(response.ok()).toBeTruthy();
 
   const jsonData = await response.json();
-  const process = jsonData.value[0]
-  console.log(process);
+  const proc = jsonData.value[0]
+  if (proc.Name != "RDA_"+$LAST_RUN) {
+    console.log("FAILED!!")
+  }
+  console.log(proc);
 });
