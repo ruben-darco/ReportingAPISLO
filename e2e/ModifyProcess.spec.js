@@ -1,13 +1,6 @@
 import { test, expect, request } from "@playwright/test";
 
-/* TODO:
-- Move username/password to secret storage
-- Move "Login" to storageState thing
-- Move activity update to one test
-- Move process title update to other test
-- Make parameter for process unique ID
-- Move API key into secret storage 
-*/
+
 
 test("Update Process Title and First Activity", async ({ page }) => {
   await page.goto("https://us.promapp.com/smoketest/home/login?returnurl=%2fsmoketest%2f");
