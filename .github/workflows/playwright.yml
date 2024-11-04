@@ -17,7 +17,7 @@ jobs:
         gh variable set LAST_RUN --body $(date +'%Y-%m-%dT%H:%M:%S')
         gh variable list
       env:
-        GH_TOKEN: ${{ secrets.FULL_PAT }}
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
       with:
@@ -27,8 +27,9 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: LAST_RUN=${{ vars.LAST_RUN }} npx playwright test
-
+      run: npx playwright test
+      env:
+        LAST_RUN: ${{ vars.LAST_RUN }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
