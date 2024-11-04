@@ -1,5 +1,6 @@
 name: Playwright Tests
 
+
 on:
   push:
     branches: [ main ]
@@ -19,7 +20,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: LAST_RUN=$LAST_RUN npx playwright test
+      run: LAST_RUN=${{ vars.LAST_RUN }} npx playwright test
     - run: |
         gh variable list
         gh variable set LAST_RUN --body $(date +'%Y-%m-%dT%H:%M:%S')
