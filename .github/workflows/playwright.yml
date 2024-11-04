@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-    - cron: '1 * * * *' # run at the beginning of the hour
+  - cron: '*/30 * * * *' # Run every 30 min
 jobs:
   UpdateProcessManager:
     permissions: write-all
