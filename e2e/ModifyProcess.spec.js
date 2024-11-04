@@ -57,8 +57,9 @@ test("Check API for last item", async ({ request }) => {
 
   const jsonData = await response.json();
   const proc = jsonData.value[0]
-  if (proc.Name != "RDA_"+$LAST_RUN) {
-    console.log("FAILED!!")
-  }
-  console.log(proc);
+  const compareValue = "RDA_"+process.env.LAST_RUN
+  console.log(`Process name is: ${proc.Name}`)
+  console.log(`Compare value is: ${compareValue}`)
+  expect(proc.Name == compareValue).toBeTruthy()
+  
 });
