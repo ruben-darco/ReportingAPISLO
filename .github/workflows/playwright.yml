@@ -5,7 +5,7 @@ on:
   push:
     branches: [ main ]
   schedule:
-  - cron: '*/30 * * * *' # Run every 30 min
+  - cron: '10 * * * *' # Run every hour at the 10 min mark - please note that GH doesn't always have the time for us at that time.
 jobs:
   UpdateProcessManager:
     permissions: write-all
