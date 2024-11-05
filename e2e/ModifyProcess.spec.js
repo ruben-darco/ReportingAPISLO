@@ -53,7 +53,7 @@ test("Check API for last item", async ({ request }) => {
   const dateStr = proc.Name.substring(4); // strip off the 'RDA_'
   const prevRun = new Date(Date.parse(dateStr))
   const now = new Date()
-  const twelveHours = 14*3600000;
+  const hours13 = 13*3600000;
   console.log(`Now: ${now}; prevRun: ${prevRun}; Compared: ${now- prevRun}`);
-  expect((now - prevRun) < twelveHours).toBeTruthy()
+  expect((now - prevRun) < hours13).toBeTruthy()
 });
