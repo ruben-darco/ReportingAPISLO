@@ -3,6 +3,7 @@ import { test, expect, request } from "@playwright/test";
 
 
 test("Update Process Title and First Activity", async ({ page }) => {
+  test.slow();
   await page.goto("https://us.promapp.com/smoketest/home/login?returnurl=%2fsmoketest%2f");
   await page.getByPlaceholder("Username").focus()
   await page.getByPlaceholder("Username").fill("Ruben");
@@ -19,7 +20,7 @@ test("Update Process Title and First Activity", async ({ page }) => {
   await page.goto("https://us.promapp.com/smoketest/Process/03fe63d3-8ecb-4a86-909c-3cd6228f796f");
   await page.getByRole("link", { name: "Edit" }).click();
 
-  // //update the first activity
+  // // //update the first activity
   // await page.locator('[data-test="process-activity-header-default"]').click();
   // await page.waitForSelector('[data-test="process-activity-header-edit"]');
   // await page.locator('[data-test="process-activity-header-edit"]').click();
@@ -33,6 +34,11 @@ test("Update Process Title and First Activity", async ({ page }) => {
   await page.locator('[data-test="process-edit-summary-title"]').fill(teststring);
   await page.locator('[data-test="process-owner-autocomplete-container"] div').first().click();
   await page.locator('[data-test="process-quick-save"]').click();
+  await page.locator('[data-test="process-publish"]').click();
+  await page.locator('[data-test="shared-activity-update-reason-input"]').click();
+  await page.locator('[data-test="shared-activity-update-reason-input"]').focus();
+  await page.locator('[data-test="shared-activity-update-reason-input"]').fill(`Publish for  ${teststring}`);
+  await page.locator('#react-dialog-holder').getByRole('button', { name: 'Publish' }).click();
 });
 
 test("Check API for last item", async ({ request }) => {

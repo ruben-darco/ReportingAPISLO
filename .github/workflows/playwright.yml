@@ -21,7 +21,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      # We don't really care about browser support and running multiple workers and multiple browsers at the same time doesn't work, because we're updating the same process
+      run: npx playwright test --project=chromium -j 1
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
