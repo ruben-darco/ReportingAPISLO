@@ -6,9 +6,9 @@ test("Update Process Title and First Activity", async ({ page }) => {
   test.slow();
   await page.goto("https://us.promapp.com/smoketest/home/login?returnurl=%2fsmoketest%2f");
   await page.getByPlaceholder("Username").focus()
-  await page.getByPlaceholder("Username").fill("Ruben");
+  await page.getByPlaceholder("Username").fill(process.env.PM_USER);
   await page.getByPlaceholder("Password").focus()
-  await page.getByPlaceholder("Password").fill("wrAyH4qMwHif7r1sSAHnwGaYKiLNYyEY0M8t02Vik0Qh0Rg6gCjm");
+  await page.getByPlaceholder("Password").fill(process.env.PM_PASS);
   await page.getByRole("button", { name: "Login", exact: true }).click();
 
   // check if we're logged in
@@ -44,7 +44,7 @@ test("Update Process Title and First Activity", async ({ page }) => {
 test("Check API for last item", async ({ request }) => {
   const response = await request.get(encodeURI("https://us-reporting.promapp.io/odata/processes?$filter=UniqueId eq 03fe63d3-8ecb-4a86-909c-3cd6228f796f"), {
     headers: {
-      Authorization: "Bearer gxnqaVeXmyc9PgyagS02GWvVh1TUMv70mNMfkPBbMN4",
+      Authorization: "Bearer "+process.env.APIKEY,
     },
   });
   expect(response.ok()).toBeTruthy();
