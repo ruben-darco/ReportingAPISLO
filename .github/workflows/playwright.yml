@@ -24,8 +24,8 @@ jobs:
       # We don't really care about browser support and running multiple workers and multiple browsers at the same time doesn't work, because we're updating the same process
       run: npx playwright test --project=chromium -j 1
       env:
-        PM_USER: ${{ secrets.PROMASTER_USERNAME }}
-        PM_PASS: ${{ secrets.PROMASTER_PASSWORD }}
+        PM_USER: ${{ secrets.PM_USER }}
+        PM_PASS: ${{ secrets.PM_PASS }}
         APIKEY: ${{ secrets.APIKEY }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
