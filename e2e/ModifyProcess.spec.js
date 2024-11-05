@@ -20,13 +20,13 @@ test("Update Process Title and First Activity", async ({ page }) => {
   await page.goto("https://us.promapp.com/smoketest/Process/03fe63d3-8ecb-4a86-909c-3cd6228f796f");
   await page.getByRole("link", { name: "Edit" }).click();
 
-  // // //update the first activity
-  // await page.locator('[data-test="process-activity-header-default"]').click();
-  // await page.waitForSelector('[data-test="process-activity-header-edit"]');
-  // await page.locator('[data-test="process-activity-header-edit"]').click();
-  // await page.locator('[data-test="process-activity-header-edit"]').fill(teststring);
-  // await page.locator('[data-test="process-procedure-commit"]').click();
-  // await page.locator('[data-test="process-quick-save"]').click();
+  // //update the first activity
+  await page.locator('[data-test="process-activity-header-default"]').click();
+  await page.waitForSelector('[data-test="process-activity-header-edit"]');
+  await page.locator('[data-test="process-activity-header-edit"]').click();
+  await page.locator('[data-test="process-activity-header-edit"]').fill(teststring);
+  await page.locator('[data-test="process-procedure-commit"]').click();
+  await page.locator('[data-test="process-quick-save"]').click();
 
   // update the process title
   await page.locator("#pvm-app-container").getByText("Summary").click();
