@@ -21,8 +21,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      # We don't really care about browser support and running multiple workers and multiple browsers at the same time doesn't work, because we're updating the same process
-      run: npx playwright test --project=chromium -j 1
+      # We're not really testing browser compatibility. Also, the "Update Process Title and First Activity" test can't run in parallel.
+      run: npx playwright test --project=chromium -j 2
       env:
         PM_USER: ${{ secrets.PM_USER }}
         PM_PASS: ${{ secrets.PM_PASS }}
